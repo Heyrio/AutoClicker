@@ -25,10 +25,15 @@ namespace WindowsFormsApp1 {
             uint Y = (uint)Cursor.Position.Y;
            
         }
+        //private void MoveCursor() {
+            // Set the Current cursor, move the cursor's Position,
+            // and set its clipping rectangle to the form. 
+
+        //    this.Cursor = new Cursor(Cursor.Current.Handle);
+        //    Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+        //}
         private void button1_Click(object sender, EventArgs e) {
             Console.WriteLine("Auto Mouse starting..");
-            //timer1.Enabled = true;
-
             for (int i = 0; i < 1000; i++) {
                 System.Threading.Thread.Sleep(100);
                 uint X = (uint)Cursor.Position.X;
@@ -41,8 +46,6 @@ namespace WindowsFormsApp1 {
 
         private void button2_Click(object sender, EventArgs e) {
             Console.WriteLine("Training Mouse..");
-            //timer1.Enabled = false;
-
         }
         //private void timer1_Tick(object sender, EventArgs e) {
         //    uint X = (uint)Cursor.Position.X;
@@ -54,11 +57,13 @@ namespace WindowsFormsApp1 {
   
 
         private void pictureBox1_Click(object sender, EventArgs e) {
-
+            //For The troll Face
         }
 
+        //Gets Hexadecimal color
         private void button3_Click_1(object sender, EventArgs e) {
-            textBox1.Text = textBox1.Text + "1";
+            string input = textBox1.Text;
+            MessageBox.Show("Color " + input + " is locked on!", "Locked", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 }
