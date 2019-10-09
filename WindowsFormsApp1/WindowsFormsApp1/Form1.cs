@@ -25,46 +25,29 @@ namespace WindowsFormsApp1 {
             uint Y = (uint)Cursor.Position.Y;
            
         }
-        //private void MoveCursor() {
-            // Set the Current cursor, move the cursor's Position,
-            // and set its clipping rectangle to the form. 
-
-        //    this.Cursor = new Cursor(Cursor.Current.Handle);
-        //    Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-        //}
         private void button1_Click(object sender, EventArgs e) {
             Console.WriteLine("Auto Mouse starting..");
-            for (int i = 0; i < 1000; i++) {
-                System.Threading.Thread.Sleep(100);
+            string inputHexColorCode = textBox1.Text;
+            MessageBox.Show("Color " + inputHexColorCode + " is locked on!", "Locked", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            for (int i = 0; i < 200; i++) {
+                SearchPixel(inputHexColorCode);
                 uint X = (uint)Cursor.Position.X;
                 uint Y = (uint)Cursor.Position.Y;
-                Console.WriteLine(X);
-                Console.WriteLine(Y);
                 mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
+                System.Threading.Thread.Sleep(300);
             }
         }
 
         private void button2_Click(object sender, EventArgs e) {
             Console.WriteLine("Training Mouse..");
         }
-        //private void timer1_Tick(object sender, EventArgs e) {
-        //    uint X = (uint)Cursor.Position.X;
-        //    uint Y = (uint)Cursor.Position.Y;
-        //    Console.WriteLine(X);
-        //    Console.WriteLine(Y);
-        //    mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, X, Y, 0, 0);
-        //}
-  
-
         private void pictureBox1_Click(object sender, EventArgs e) {
             //For The troll Face
         }
 
         //Gets Hexadecimal color
-        private void button3_Click_1(object sender, EventArgs e) {
-            string inputHexColorCode = textBox1.Text;
-            MessageBox.Show("Color " + inputHexColorCode + " is locked on!", "Locked", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
+   
 
         private bool SearchPixel(string hexcode) {
             //creates an empty bitmap with the size of the screen
@@ -75,8 +58,15 @@ namespace WindowsFormsApp1 {
 
             for (int i = 0; i < SystemInformation.VirtualScreen.Width; i++) {
 
-                for (int j = 0; j < SystemInformation.VirtualScreen.Width; j++) { 
-                
+                for (int j = 0; j < SystemInformation.VirtualScreen.Height; j++) {
+                    Color currentPixelColor = bitmap.GetPixel(i, j);
+
+                    if (desiredPixelColor == currentPixelColor) {
+                           this.Cursor = new Cursor(Cursor.Current.Handle);
+                           Cursor.Position = new Point(i, j);
+                        return true;
+                    }
+
                 }
             
             }
