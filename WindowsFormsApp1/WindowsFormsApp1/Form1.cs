@@ -62,8 +62,25 @@ namespace WindowsFormsApp1 {
 
         //Gets Hexadecimal color
         private void button3_Click_1(object sender, EventArgs e) {
-            string input = textBox1.Text;
-            MessageBox.Show("Color " + input + " is locked on!", "Locked", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            string inputHexColorCode = textBox1.Text;
+            MessageBox.Show("Color " + inputHexColorCode + " is locked on!", "Locked", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private bool SearchPixel(string hexcode) {
+            //creates an empty bitmap with the size of the screen
+            Bitmap bitmap = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Graphics graphics = Graphics.FromImage(bitmap as Image);
+            graphics.CopyFromScreen(0, 0, 0, 0, bitmap.Size);
+            Color desiredPixelColor = ColorTranslator.FromHtml(hexcode);
+
+            for (int i = 0; i < SystemInformation.VirtualScreen.Width; i++) {
+
+                for (int j = 0; j < SystemInformation.VirtualScreen.Width; j++) { 
+                
+                }
+            
+            }
+            return false;
         }
     }
 }
